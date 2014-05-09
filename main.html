@@ -38,6 +38,7 @@ found in the LICENSE file.
     <script src="js/items.js"></script>
     <script src="js/items_list.js"></script>
     <script src="js/pack_item_overlay.js"></script>
+    <script src="js/delete_behavior_overlay.js"></script>
     <script src="js/main.js"></script>
   </head>
   <body>
@@ -121,6 +122,21 @@ found in the LICENSE file.
             <div class="button-strip">
               <button id="pack-item-dismiss" i18n-content="cancel"></button>
               <button id="pack-item-commit" i18n-content="packButton"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="behaviorOverlay" class="page">
+        <div id="behavior-content-area" class="content-area">
+        </div>
+      </div>
+            <div id="deleteBehaviorOverlay" class="page">
+        <h2 id="delete-behavior-title"></h2>
+        <div class="action-area">
+          <div class="action-area-right">
+            <div class="button-strip">
+              <button id="delete-behavior-dismiss" i18n-content="cancel"></button>
+              <button id="delete-behavior-commit" i18n-content="deleteButton"></button>
             </div>
           </div>
         </div>
@@ -295,6 +311,10 @@ found in the LICENSE file.
                   href="#" hidden></a>
               <a class="permissions-link"
                   i18n-content="extensionSettingsPermissions" href="#"></a>
+              <a class="behavior-link"
+                  i18n-content="extensionBehavior" href="#"></a>
+              <a class="delete-behavior-link"
+                  i18n-content="extensionDeleteBehavior" href="#"></a>
               <a class="site-link" target="_blank" hidden></a>
               <a class="options-link" i18n-content="extensionSettingsOptions"
                   href="#" target="_blank" hidden></a>

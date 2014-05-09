@@ -236,6 +236,9 @@ cr.define('apps_dev_tool', function() {
       // The 'Permissions' link.
       this.setPermissionsLink_(item, node);
 
+      // The 'Behavior' link.
+      this.setBehaviorLink_(item, node);
+
       // The 'View in Web Store/View Web Site' link.
       if (item.homepage_url)
         this.setWebstoreLink_(item, node);
@@ -260,6 +263,9 @@ cr.define('apps_dev_tool', function() {
 
       // Set delete button handler.
       this.setDeleteButton_(item, node);
+
+      // Set delete behavior handler.
+      this.setDeleteBehaviorButton_(item, node);
 
       // First get the item id.
       var idLabel = node.querySelector('.extension-id');
@@ -371,6 +377,19 @@ cr.define('apps_dev_tool', function() {
     },
 
     /**
+     * Sets the behavior link handler.
+     * @param {!Object} item A dictionary of item metadata.
+     * @param {!HTMLElement} el HTML element containing all items.
+     * @private
+     */
+    setBehaviorLink_: function(item, el) {
+      var behavior = el.querySelector('.behavior-link');
+      behavior.addEventListener('click', function(e) {
+        AppsDevTool.showOverlay($('behaviorOverlay'));
+      });
+    },
+
+    /**
      * Sets the pack button handler.
      * @param {!Object} item A dictionary of item metadata.
      * @param {!HTMLElement} el HTML element containing all items.
@@ -466,6 +485,28 @@ cr.define('apps_dev_tool', function() {
         incognito.querySelector('input').checked = item.incognito_enabled;
         incognito.hidden = false;
       }
+    },
+
+    /**
+     * Sets the delete extension behavior history handler.
+     * @param {!Object} item A dictionary of item metadata.
+     * @param {!HTMLElement} el HTML element containing all items.
+     * @private
+     */
+    setDeleteBehaviorButton_: function(item, el) {
+      var deleteBehaviorButton = el.querySelector('.delete-behavior-link');
+      deleteBehaviorButton.addEventListener('click', function(e) {
+        if (item.isApp) {
+          $('delete-behavior-title').textContent =
+              str('deleteBehaviorAppOverlay');
+        } else {
+          $('delete-behavior-title').textContent =
+              str('deleteBehaviorExtensionOverlay');
+        }
+        $('item-root-dir').value = item.path;
+        AppsDevTool.showOverlay($('deleteBehaviorOverlay'));
+      });
+      deleteBehaviorButton.hidden = false;
     },
 
     /**
